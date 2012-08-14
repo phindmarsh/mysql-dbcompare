@@ -18,7 +18,7 @@ else
 $source_sql = file_get_contents($source);
 $dest_sql = file_get_contents($destination);
 
-$diff = $differ->getUpdates($dest_sql, $source_sql);
+$diffs = $differ->getUpdates($dest_sql, $source_sql);
 $generated = date('r');
 
 echo "
@@ -30,10 +30,11 @@ echo "
 # START DIFF;
 
 ";
-echo implode("\n\n", $diff);
+foreach($diffs as $diff){
+	echo "$diff;\n\n";
+}
 
 echo "
-
 # END DIFF;
 ";
 
