@@ -50,19 +50,19 @@ public keys. OPTIONS include the `db` commands above, plus:
 
 ```bash
 # The following would diff two files on the local disk:
-$ $argv[0] --from-file=test/dev.sql --to-file=test/live.sql
+$ ./dbcompare.php --from-file=test/dev.sql --to-file=test/live.sql
 
 # This would connect to a remote server and diff against a local file
-$ $argv[0] --from-file=test/dev.sql \
-           --to-ssh-server=server.example.com --to-ssh-user=root \
-           --to-ssh-pubkey=path/to/id_rsa.pub --to-ssh-privkey=path/to/id_rsa \
-           --to-db-name=db_live --to-db-user=root --to-db-password=password123
+$ ./dbcompare.php   --from-file=test/dev.sql \
+                    --to-ssh-server=server.example.com --to-ssh-user=root \
+                    --to-ssh-pubkey=path/to/id_rsa.pub --to-ssh-privkey=path/to/id_rsa \
+                    --to-db-name=db_live --to-db-user=root --to-db-password=password123
 
 # Similarly, this example would use a local mysqldump against a remote server
-$ $argv[0] --from-db-name=db_dev --from-db-user=root --from-db-password=test123 \
-           --to-ssh-server=server.example.com --to-ssh-user=root \
-           --to-ssh-pubkey=path/to/id_rsa.pub --to-ssh-privkey=path/to/id_rsa \
-           --to-db-name=db_live --to-db-user=root --to-db-password=password123
+$ ./dbcompare.php   --from-db-name=db_dev --from-db-user=root --from-db-password=test123 \
+                    --to-ssh-server=server.example.com --to-ssh-user=root \
+                    --to-ssh-pubkey=path/to/id_rsa.pub --to-ssh-privkey=path/to/id_rsa \
+                    --to-db-name=db_live --to-db-user=root --to-db-password=password123
 ```
 
 
