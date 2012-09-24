@@ -470,6 +470,10 @@ class dbStructUpdater
 		{
 			$key = $m[0];
 		}
+		elseif (preg_match('/^CONSTRAINT\s+`?\w+`?/i', $line, $m))
+		{
+			$key = $m[0]; // match foreign key constraints 
+		}
 		elseif (preg_match('/^`?\w+`?/i', $line, $m))//field definition
 		{
 			$key = '!'.$m[0];//to make sure fields will be synchronised before the keys
@@ -493,6 +497,7 @@ class dbStructUpdater
 		}
 		$result['key'] = $this->normalizeString($key);
 		$result['line']= $line;
+
 		return $result;
 	}
 
@@ -627,6 +632,21 @@ class dbStructUpdater
 
 			}
 		}
+		elseif(preg_match('/^CONSTRAINT\s`?(\w+)`?/', $sql, $m)){
+			
+			$name = trim($m[1]);
+			switch($action){
+				case 'drop':
+					$result .= 'DROP FOREIGN KEY `'.$name.'`';
+					break;
+				case 'add':
+					$result .= 'ADD ' . $sql;
+					break;
+				case 'modify':
+					$result .= "DROP FOREIGN KEY `{$name}`;\n$result ADD {$sql}";
+					break;
+			}
+		}
 		else //fields operations
 		{
 			$sql = rtrim(trim($sql), ',');
@@ -641,6 +661,7 @@ class dbStructUpdater
 				$result.= ' '.$sql;
 			}
 		}
+
 		return $result;
 	}
 
