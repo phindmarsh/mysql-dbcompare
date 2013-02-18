@@ -76,6 +76,8 @@ class DBSource extends Source {
 		'db-password',
 		'db-name',
 		'db-host',
+		'db-port',
+		'db-socket'
 	);
 	
 	public function __construct($type, $args){
@@ -101,6 +103,10 @@ class DBSource extends Source {
 			$command[] = '-p'.$this->args['db-password'];
 		if(isset($this->args['db-host']))
 			$command[] = '-h'.$this->args['db-host'];
+		if(isset($this->args['db-port']))
+			$command[] = '-P'.$this->args['db-port'];
+		if(isset($this->args['db-socket']))
+			$command[] = '-S'.$this->args['db-socket'];
 		
 		$command[] = $this->args['db-name'];
 		$command[] = "2>&1";
