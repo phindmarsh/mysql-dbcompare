@@ -76,6 +76,8 @@ class DBSource extends Source {
 		'db-password',
 		'db-name',
 		'db-host',
+		'db-port',
+		'db-socket'
 	);
 	
 	public function __construct($type, $args){
