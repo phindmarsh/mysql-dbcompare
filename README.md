@@ -8,6 +8,10 @@ Connections can be made with SSH to remote servers, where `mysqldump` is execute
 
 SSH connections require the PECL `ssh2` library and `libssh2`, see [here](http://pecl.php.net/package/ssh2)
 
+**Installation:**
+
+Download the [`mysql-compare.phar`](https://github.com/phindmarsh/mysql-dbcompare/raw/master/build/mysql-compare.phar) archive from the build directory. This can be placed in your `/usr/bin`.
+
 **Usage:**
 
 ```
@@ -90,6 +94,4 @@ ALTER TABLE `foo` MODIFY `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAM
 
 # END DIFF;
 ```
-
-This script assumes your php runtime is located at `/usr/bin/php`, if it's not you'll need to change it at the top of the file. You could copy the script into `/usr/local/bin` and rename it to `dbcompare` to make usage simpler.
 
