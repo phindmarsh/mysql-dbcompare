@@ -1,10 +1,10 @@
-#!/usr/bin/env php
 <?php
 
-include_once 'dbStruct.php';
-include_once 'Source.php';
+include_once 'lib/exception.php';
+include_once 'lib/dbStruct.php';
+include_once 'lib/Source.php';
 
-$longopts = array('verbose', 'help');
+$longopts = array('verbose', 'help', 'test');
 foreach(Source::getArgList() as $arg){
     $longopts[] = "from-$arg:";
     $longopts[] = "to-$arg:";
@@ -12,6 +12,11 @@ foreach(Source::getArgList() as $arg){
 $options = getopt('', $longopts);
 
 if(isset($options['help'])) usage();
+if(isset($options['test'])){
+  $options = array();
+  $options['from-file'] = 'test/dev.sql';
+  $options['to-file'] = 'test/live.sql';
+}
 
 define('VERBOSE', isset($options['verbose']));
 
