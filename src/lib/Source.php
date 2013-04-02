@@ -7,6 +7,7 @@ abstract class Source {
 	
 	public function __construct($type, $args){
 		$this->args = $args;
+		$this->type = $type;
 	}
 	
 	public static function init($type, array $args){
@@ -56,7 +57,7 @@ class FileSource extends Source {
 			return file_get_contents($this->args['file']);
 		}
 		else
-			throw new Exception("Could not read source file for $type");
+			throw new Exception("Could not read source file for '{$this->type}'");
 	}
 	
 	public static function getArgList(){
