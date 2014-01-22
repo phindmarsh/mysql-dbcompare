@@ -90,8 +90,18 @@ class DBSource extends Source {
 		
 	}
 	
-	public function getStructure(){
-		return shell_exec( $this->buildCommand() );
+	public function getStructure() {
+		$output      = array();
+		$returnValue = null;
+
+		exec($this->buildCommand(), $output, $returnValue);
+		$output = implode(PHP_EOL, $output);
+
+		if($returnValue !== 0) {
+			throw new Exception("Dumping '{$this->type}' data - " . $output);
+		}
+		
+		return $output;
 	}
 	
 	protected function buildCommand(){
