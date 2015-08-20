@@ -1,6 +1,6 @@
 # MySQL DBCompare
 
-This commandline script will generate a structure diff of two input files and echo it to SDOUT.
+This commandline script will generate a structure diff of two input files and echo it to STDOUT.
 
 It uses the "Database structure synchronizer" class from [phpclasses.org](http://www.phpclasses.org/package/4615-PHP-Compare-MySQL-databases-to-synchronize-structures.html) with a simple commandline interface. 
 
